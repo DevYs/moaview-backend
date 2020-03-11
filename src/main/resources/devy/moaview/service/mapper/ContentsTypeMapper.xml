@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="devy.moaview.service.mapper.ContentsTypeMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="contentsTypeNo" parameterType="devy.moaview.domain.ContentsType">
+        insert into contents_type (
+            contents_type_name
+        ) values (
+            #{contentsTypeName}
+        )
+        ;
+    </insert>
+
+    <delete id="delete" parameterType="devy.moaview.domain.ContentsType">
+        delete from contents_type
+        where
+            contents_type_no = #{contentsTypeNo}
+        ;
+    </delete>
+
+    <update id="update" parameterType="devy.moaview.domain.ContentsType">
+        update contents_type
+        set
+            contents_type_name = #{contentsTypeName}
+        where
+            contents_type_no = #{contentsTypeNo}
+        ;
+    </update>
+
+    <select id="select" resultType="devy.moaview.domain.ContentsType">
+        SELECT
+            *
+        FROM contents_type
+        ORDER BY sequence ASC
+        ;
+    </select>
+
+    <select id="selectOne" resultType="devy.moaview.domain.ContentsType">
+        SELECT
+            *
+        FROM contents_type
+        WHERE
+            contents_type_no = #{contentsTypeNo}
+        ;
+    </select>
+
+</mapper>

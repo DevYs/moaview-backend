@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="devy.moaview.service.mapper.ContentsMapper">
+   
+    <insert id="insert" useGeneratedKeys="true" keyProperty="contentsNo" parameterType="devy.moaview.domain.Contents">
+        INSERT INTO contents (
+            target_contents_no,
+            title,
+            url,
+            description,
+            thumbnail_url,
+            reg_date
+        ) VALUES (
+            #{targetContentsNo},
+            #{title},
+            #{url},
+            #{description},
+            #{thumbnailUrl},
+            #{regDate}
+        )
+        ;
+    </insert>
+
+    <delete id="delete" parameterType="devy.moaview.domain.Contents">
+        DELETE FROM contents
+        WHERE
+            contents_no = #{contentsNo}
+        ;
+    </delete>
+
+    <update id="update" parameterType="devy.moaview.domain.Contents">
+        UPDATE contents
+        SET
+            title = #{title},
+            url = #{url},
+            description = #{description},
+            thumbnail_url = #{thumbnailUrl}
+        WHERE
+            contents_no = #{contentsNo}
+        ;
+    </update>
+
+    <select id="select" resultType="devy.moaview.domain.Contents" parameterType="devy.moaview.controller.request.RequestContents">
+        SELECT
+            c.contents_no,
+            tc.contents_type_no,
+            tc.site_no,
+            tc.target_contents_no,
+            tc.target_contents_name,
+            c.title,
+            c.url,
+            c.description,
+            c.thumbnail_url,
+            c.reg_date
+        FROM contents c
+        JOIN target_contents tc ON c.target_contents_no = tc.target_contents_no
+        WHERE 1=1
+            <if test="title != null">
+                AND title LIKE '%' || #{title} || '%'
+            </if>
+            <if test="contentsTypeNoList.size != 0">
+                AND tc.contents_type_no IN
+                <foreach collection="contentsTypeNoList" index="index" item="contentsTypeNo"  open="(" close=")" separator=",">
+                    #{contentsTypeNo}
+                </foreach>
+            </if>
+            <if test="0 &lt; pageNo">
+                limit #{limit}
+                offset #{offset}
+            </if>
+    </select>
+
+    <select id="selectOne" resultType="devy.moaview.domain.Contents">
+        SELECT * FROM contents
+        WHERE
+            contents_no = #{contentsNo}
+        ;
+    </select>
+
+</mapper>

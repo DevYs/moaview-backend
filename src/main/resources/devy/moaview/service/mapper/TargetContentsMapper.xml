@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="devy.moaview.service.mapper.TargetContentsMapper">
+   
+    <insert id="insert" useGeneratedKeys="true" keyProperty="targetContentsNo" parameterType="devy.moaview.domain.TargetContents">
+        INSERT INTO target_contents (
+            contents_type_no,
+            site_no,
+            target_contents_name,
+            target_contents_url,
+            target_contents_css_selector
+        ) VALUES (
+            #{contentsTypeNo},
+            #{siteNo},
+            #{targetContentsName},
+            #{targetContentsUrl},
+            #{targetContentsCssSelector}
+        )
+        ;
+    </insert>
+
+    <delete id="delete" parameterType="devy.moaview.domain.TargetContents">
+        DELETE FROM target_contents
+        WHERE
+            target_contents_no = #{targetContentsNo}
+        ;
+    </delete>
+
+    <update id="update" parameterType="devy.moaview.domain.TargetContents">
+        UPDATE target_contents
+        SET
+            contents_type_no = #{contentsTypeNo},
+            site_no = #{siteNo},
+            target_contents_name = #{targetContentsName},
+            target_contents_url = #{targetContentsUrl},
+            target_contents_css_selector = #{targetContentsCssSelector}
+        WHERE
+            target_contents_no = #{targetContentsNo}
+        ;
+    </update>
+
+    <select id="select" resultType="devy.moaview.domain.TargetContents" parameterType="devy.moaview.controller.request.RequestTargetContents">
+        select
+            *
+        from target_contents
+        where 1=1
+            <if test="contentsTypeNo != 0">
+                and contents_type_no = #{contentsTypeNo}
+            </if>
+            <if test="siteNo != 0">
+                and site_no = #{siteNo}
+            </if>
+            <if test="searchWord != null">
+                and target_contents_name LIKE '%' || #{searchWord} || '%'
+            </if>
+            <if test="0 &lt; pageNo">
+                limit #{limit}
+                offset #{offset}
+            </if>
+        ;
+    </select>
+
+    <select id="selectOne" resultType="devy.moaview.domain.TargetContents" parameterType="devy.moaview.domain.TargetContents">
+        select * from target_contents
+        where
+            target_contents_no = #{targetContentsNo}
+        ;
+    </select>
+
+</mapper>

@@ -19,13 +19,13 @@ public class SpringSecurityApplication implements CommandLineRunner {
 	private static final Logger logger = LoggerFactory.getLogger(SpringSecurityApplication.class);
 
 	// Table 생성 스크립트
-	private static final String SQL_NAME 	  = "create.sql";
+	private static final String SQL_NAME 	  = "./create.sql";
 
 	// SQLite 데이터베이스 파일
-	private static final String DB_NAME       = "sqlite.db";
+	private static final String DB_NAME       = "./sqlite.db";
 
 	// SQLite 명령을 실행시키는 도구
-	private static final String SQLITE 		  = "sqlite3";
+	private static final String SQLITE 		  = "./sqlite3";
 
 	// 터미널에서 SQLite의 데이터베이스를 생성하는 명령
 	private static final String CMD 		  = SQLITE + " " + DB_NAME;

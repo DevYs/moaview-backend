@@ -22,8 +22,6 @@ import java.util.List;
 @SpringBootTest
 public class TargetContentsTests {
 
-	private final Logger logger = LoggerFactory.getLogger(TargetContentsTests.class);
-
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
@@ -58,9 +56,6 @@ public class TargetContentsTests {
 		todayhumor = siteList.get(0);
 		clien = siteList.get(1);
 
-		logger.info(todayhumor.toString());
-		logger.info(clien.toString());
-
 		ContentsType contentsType = new ContentsType();
 
 		contentsType.setContentsTypeName("유머");
@@ -72,9 +67,6 @@ public class TargetContentsTests {
 		List<ContentsType> contentsTypeList = (List<ContentsType>) ContentsType.list(null, contentsTypeMapper);
 		humor = contentsTypeList.get(0);
 		community = contentsTypeList.get(1);
-
-		logger.info(humor.toString());
-		logger.info(community.toString());
 	}
 
 	/**

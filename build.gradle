@@ -9,17 +9,6 @@ group = 'devy.moaview'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
-/** Javadoc 설정 */
-javadoc {
-	source 'src.main.java'
-	options.memberLevel = JavadocMemberLevel.PRIVATE
-	options.encoding = 'UTF-8'
-	options.addStringOption("locale","ko_KR");
-	options.addStringOption("encoding","UTF-8");
-	options.addStringOption("charset","UTF-8");
-	options.addStringOption("docencoding","UTF-8")
-}
-
 repositories {
 	mavenCentral()
 }
@@ -35,10 +24,28 @@ dependencies {
 	implementation 'org.xerial:sqlite-jdbc:3.25.2'
 	implementation 'org.jsoup:jsoup:1.13.1'
 
+	implementation 'org.mybatis:mybatis-typehandlers-jsr310:1.0.1'
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.4.0'
+
 	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
-	
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+}
+
+//test {
+//	useJUnitPlatform()
+//}
+
+/** Javadoc 설정 */
+javadoc {
+    source 'src.main.java'
+    options.memberLevel = JavadocMemberLevel.PRIVATE
+    options.encoding = 'UTF-8'
+    options.addStringOption("locale","ko_KR");
+    options.addStringOption("encoding","UTF-8");
+    options.addStringOption("charset","UTF-8");
+    options.addStringOption("docencoding","UTF-8")
 }
 
 /** 실행, 빌드 설정 분리 */

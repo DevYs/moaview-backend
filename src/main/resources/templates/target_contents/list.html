@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>타겟 콘텐츠 목록</title>
+</head>
+<body>
+    <div th:insert="header :: header"></div>
+
+    타겟 콘텐츠 목록
+
+    <form th:action="@{~/target_contents/list}" method="get">
+        <div>
+            <input type="text" name="siteName" />
+            <button>검색</button>
+        </div>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>콘텐츠타입</th>
+                <th>사이트명</th>
+                <th>타겟콘텐츠명</th>
+                <th>URL / CSS 셀렉터</th>
+                <th>메타태그</th>
+                <th>셀렉터</th>
+                <th>속성</th>
+                <th>접속여부</th>
+                <th>수정</th>
+                <th>삭제</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="targetContents : ${responseTargetContents.targetContentsList}">
+                <td th:text="${targetContents.targetContentsNo}"></td>
+                <td th:text="${responseTargetContents.contentsTypeMap[targetContents.contentsTypeNo].contentsTypeName}"></td>
+                <td th:text="${responseTargetContents.siteMap[targetContents.siteNo].siteName}"></td>
+                <td th:text="${targetContents.targetContentsName}"></td>
+                <td>
+                    <p th:text="${targetContents.targetContentsUrl}"></p>
+                    <p th:text="${targetContents.targetContentsCssSelector}"></p>
+                </td>
+                <td>
+                    <p>title</p>
+                    <p>description</p>
+                    <p>image</p>
+                    <p>url</p>
+                </td>
+                <td>
+                    <p th:text="${targetContents.titleCssSelector}"></p>
+                    <p th:text="${targetContents.descriptionCssSelector}"></p>
+                    <p th:text="${targetContents.imageCssSelector}"></p>
+                    <p th:text="${targetContents.urlCssSelector}"></p>
+                </td>
+                <td>
+                    <p th:text="${targetContents.titleAttr}"></p>
+                    <p th:text="${targetContents.descriptionAttr}"></p>
+                    <p th:text="${targetContents.imageAttr}"></p>
+                    <p th:text="${targetContents.urlAttr}"></p>
+                </td>
+                <td th:text="${targetContents.responseMessage}"></td>
+                <td> <a th:href="@{~/target_contents/modify(targetContentsNo=${targetContents.targetContentsNo})}">수정</a> </td>
+                <td> <a th:href="@{~/target_contents/remove(targetContentsNo=${targetContents.targetContentsNo})}">삭제</a> </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a th:href="@{~/target_contents/registry}">등록</a>
+    <a th:href="@{~/target_contents/test}">테스트</a>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <mapper namespace="devy.moaview.service.mapper.ContentsMapper">
    
     <insert id="insert" useGeneratedKeys="true" keyProperty="contentsNo" parameterType="devy.moaview.domain.Contents">
-        INSERT INTO contents (
+        INSERT OR REPLACE INTO contents (
             target_contents_no,
             title,
             url,
@@ -58,7 +58,7 @@
             <if test="title != null">
                 AND title LIKE '%' || #{title} || '%'
             </if>
-            <if test="contentsTypeNoList.size != 0">
+            <if test="contentsTypeNoList != null">
                 AND tc.contents_type_no IN
                 <foreach collection="contentsTypeNoList" index="index" item="contentsTypeNo"  open="(" close=")" separator=",">
                     #{contentsTypeNo}
@@ -73,7 +73,7 @@
     <select id="selectOne" resultType="devy.moaview.domain.Contents">
         SELECT * FROM contents
         WHERE
-            contents_no = #{contentsNo}
+            url = #{url}
         ;
     </select>
 

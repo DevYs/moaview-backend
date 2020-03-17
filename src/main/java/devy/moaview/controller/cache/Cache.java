@@ -3,8 +3,11 @@ package devy.moaview.controller.cache;
 import devy.moaview.domain.ContentsType;
 import devy.moaview.domain.Site;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 정보 캐시
@@ -43,6 +46,18 @@ public enum Cache {
 
 		// 2. 캐싱 여부를 확인한 후 결과를 반환
 		return checkExist(obj.getKey());
+	}
+
+	/**
+	 * 목록을 캐싱한다.
+	 * @param list
+	 * 		  캐싱할 목록
+	 * @return 캐싱 성공 여부
+	 */
+	public Map<Integer, ? extends ICache> putAll(List<? extends ICache> list) {
+		Map<Integer, ? extends ICache> collect = list.stream().collect(Collectors.toMap(ICache::getKey, obj -> obj));
+		cache().putAll(collect);
+		return cache();
 	}
 
 	/**
@@ -93,10 +108,18 @@ public enum Cache {
 	}
 
 	/**
+	 * 콘텐츠 타입, 사이트 정보 등 캐싱된 정보를 Collection 타입으로 변환하여 반환한다.
+	 * @return 콘텐츠 타입, 사이트 정보 등 Collection 타입으로 변환된 캐싱된 정보
+	 */
+	public Collection list() {
+		return cache().values();
+	}
+
+	/**
 	 * 캐싱된 정보를 Map 형태로 반환한다.
 	 * @return 캐싱된 Map 타입의 사이트 또는 콘텐츠 정보
 	 */
-	public Object getCacheMap() {
+	public Map<Integer, ? extends ICache> getCacheMap() {
 		return cache();
 	}
 

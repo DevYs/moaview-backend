@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>타겟 콘텐츠 등록</title>
+</head>
+<body>
+    <div th:insert="header :: header"></div>
+
+    타겟 콘텐츠 등록
+
+    <form th:action="@{~/target_contents/registry}" method="post">
+        <div>
+            <select name="contentsTypeNo">
+                <option th:each="contentsType : ${contentsTypeList}" th:value="${contentsType.contentsTypeNo}" th:text="${contentsType.contentsTypeName}"></option>
+            </select>
+        </div>
+        <div>
+            <select name="siteNo">
+                <option th:each="site : ${siteList}" th:value="${site.siteNo}" th:text="${site.siteName}"></option>
+            </select>
+        </div>
+
+        <h2>타겟 콘텐츠 정보</h2>
+        <div>
+            타겟콘텐츠명 : <input type="text" name="targetContentsName" />
+        </div>
+        <div>
+            타겟 콘텐츠 URL : <input type="text" name="targetContentsUrl" />
+        </div>
+        <div>
+            타겟 콘텐츠 셀렉터 : <input type="text" name="targetContentsCssSelector" />
+        </div>
+
+        <h2>메타태그</h2>
+        <div>
+            title 셀렉터 : <input type="text" name="titleCssSelector" value="meta[property=og:title]" />
+        </div>
+        <div>
+            title 태그 속성 : <input type="text" name="titleAttr" value="content" />
+        </div>
+        <div>
+            description 셀렉터 : <input type="text" name="descriptionCssSelector" value="meta[property=og:description]" />
+        </div>
+        <div>
+            description 태그 속성 : <input type="text" name="descriptionAttr" value="content" />
+        </div>
+        <div>
+            image 셀렉터 : <input type="text" name="imageCssSelector" value="meta[property=og:image]" />
+        </div>
+        <div>
+            image 태그 속성 : <input type="text" name="imageAttr" value="content" />
+        </div>
+        <div>
+            url 셀렉터 : <input type="text" name="urlCssSelector" value="meta[property=og:url]" />
+        </div>
+        <div>
+            url 태그 속성 : <input type="text" name="urlAttr" value="content" />
+        </div>
+        <div>
+            <button>등록</button>
+            <a th:href="@{~/target_contents/list}">취소</a>
+        </div>
+    </form>
+
+</body>
+</html>

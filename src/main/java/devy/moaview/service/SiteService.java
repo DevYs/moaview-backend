@@ -1,5 +1,6 @@
 package devy.moaview.service;
 
+import devy.moaview.controller.cache.Cache;
 import devy.moaview.controller.request.RequestSite;
 import devy.moaview.domain.Site;
 import devy.moaview.service.mapper.SiteMapper;
@@ -46,7 +47,8 @@ public class SiteService {
      * @return 성공여부. 1 성공, 0 실패
      */
     public int registrySite(Site site) {
-        return site.registry(siteMapper);
+        site.registry(siteMapper);
+        return Cache.SITE.put(site);
     }
 
     /**
@@ -56,7 +58,8 @@ public class SiteService {
      * @return 성공여부. 1 성공, 0 실패
      */
     public int modifySite(Site site) {
-        return site.modify(siteMapper);
+        site.modify(siteMapper);
+        return Cache.SITE.modify(site);
     }
 
     /**
@@ -66,7 +69,8 @@ public class SiteService {
      * @return 성공여부. 1 성공, 0 실패
      */
     public int removeSite(Site site) {
-        return site.remove(siteMapper);
+        site.remove(siteMapper);
+        return Cache.SITE.remove(site.getSiteNo());
     }
 
 }

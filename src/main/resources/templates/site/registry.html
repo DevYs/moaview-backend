@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>사이트 등록</title>
+</head>
+<body>
+    <div th:insert="header :: header"></div>
+
+    사이트 등록
+
+    <form th:action="@{~/site/registry}" method="post">
+        <div>
+            사이트명 : <input type="text" name="siteName" />
+        </div>
+        <div>
+            사이트 URL : <input type="text" name="siteUrl" />
+        </div>
+        <div>
+            <button>등록</button>
+            <a th:href="@{~/site/list}">취소</a>
+        </div>
+    </form>
+</body>
+</html>

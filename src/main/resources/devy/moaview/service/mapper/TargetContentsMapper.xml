@@ -8,13 +8,29 @@
             site_no,
             target_contents_name,
             target_contents_url,
-            target_contents_css_selector
+            target_contents_css_selector,
+            title_css_selector,
+            title_attr,
+            description_css_selector,
+            description_attr,
+            image_css_selector,
+            image_attr,
+            url_css_selector,
+            url_attr
         ) VALUES (
             #{contentsTypeNo},
             #{siteNo},
             #{targetContentsName},
             #{targetContentsUrl},
-            #{targetContentsCssSelector}
+            #{targetContentsCssSelector},
+            #{titleCssSelector},
+            #{titleAttr},
+            #{descriptionCssSelector},
+            #{descriptionAttr},
+            #{imageCssSelector},
+            #{imageAttr},
+            #{urlCssSelector},
+            #{urlAttr}
         )
         ;
     </insert>
@@ -33,7 +49,17 @@
             site_no = #{siteNo},
             target_contents_name = #{targetContentsName},
             target_contents_url = #{targetContentsUrl},
-            target_contents_css_selector = #{targetContentsCssSelector}
+            target_contents_css_selector = #{targetContentsCssSelector},
+            title_css_selector = #{titleCssSelector},
+            title_attr = #{titleAttr},
+            description_css_selector = #{descriptionCssSelector},
+            description_attr = #{descriptionAttr},
+            image_css_selector = #{imageCssSelector},
+            image_attr = #{imageAttr},
+            url_css_selector = #{urlCssSelector},
+            url_attr = #{urlAttr},
+            response_code = #{responseCode},
+            response_message = #{responseMessage}
         WHERE
             target_contents_no = #{targetContentsNo}
         ;

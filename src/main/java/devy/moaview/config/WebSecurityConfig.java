@@ -14,7 +14,6 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
  *
  * @author devy
  */
-@Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -30,14 +29,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
+				.antMatchers("/contents/list").permitAll()
 				.anyRequest()
 				.authenticated()
 				.and()
 			.formLogin()
 				.permitAll()
+				.defaultSuccessUrl("/contents_type/list")
 				.and()
 			.logout()
-				.permitAll();
+				.permitAll()
+				.and()
+			.csrf()
+				.disable()
+			.cors();
 	}
 
 	@Override

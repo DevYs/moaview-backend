@@ -8,7 +8,7 @@ import java.util.List;
 public class RequestContents {
 
 	/** 조회할 페이지 번호 */
-	private int pageNo;
+	private int pageNo = 1;
 
 	/** 페이지당 컬럼 수 */
 	private int limit = 20;

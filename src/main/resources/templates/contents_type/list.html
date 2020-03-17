@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>콘텐츠 타입 목록</title>
+</head>
+<body>
+    <div th:insert="header :: header"></div>
+
+    콘텐츠 타입 목록
+
+    <table>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>콘텐츠타입명</th>
+                <th>순서</th>
+                <th>수정</th>
+                <th>삭제</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="contentsType : ${contentsTypeList}">
+                <td th:text="${contentsType.contentsTypeNo}"></td>
+                <td th:text="${contentsType.contentsTypeName}"></td>
+                <td th:text="${contentsType.sequence}"></td>
+                <td>
+                    <a th:href="@{~/contents_type/modify(contentsTypeNo=${contentsType.contentsTypeNo})}">수정</a>
+                </td>
+                <td>
+                    <a th:href="@{~/contents_type/remove(contentsTypeNo=${contentsType.contentsTypeNo})}">삭제</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div>
+        <a th:href="@{~/contents_type/registry}">등록</a>
+    </div>
+
+</body>
+</html>

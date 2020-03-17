@@ -1,6 +1,8 @@
 package devy.moaview.controller.resopnse;
 
 import devy.moaview.domain.TargetContents;
+import devy.moaview.service.mapper.ContentsTypeMapper;
+import devy.moaview.service.mapper.SiteMapper;
 
 import java.util.List;
 
@@ -10,6 +12,10 @@ import java.util.List;
  * @author devy
  */
 public class ResponseTargetContents extends Response {
+
+	public ResponseTargetContents(ContentsTypeMapper contentsTypeMapper, SiteMapper siteMapper) {
+		super(contentsTypeMapper, siteMapper);
+	}
 
 	/** 타겟 콘텐츠 정보 목록 */
 	private List<TargetContents> targetContentsList;

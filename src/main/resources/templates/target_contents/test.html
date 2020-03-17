@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>타겟 콘텐츠 등록 테스트</title>
+</head>
+<body>
+    <div th:insert="header :: header"></div>
+
+    타겟 콘텐츠 등록 테스트
+
+    <div th:if="${contents != null}" th:text="${contents}"></div>
+
+    <form th:action="@{~/target_contents/test}" method="post">
+        <div>
+            <select name="contentsTypeNo">
+                <option th:each="contentsType : ${contentsTypeList}"
+                        th:value="${contentsType.contentsTypeNo}"
+                        th:text="${contentsType.contentsTypeName}"
+                        th:selected="${contentsType.contentsTypeNo == targetContents.contentsTypeNo} ? 'selected'">
+                </option>
+            </select>
+        </div>
+        <div>
+            <select name="siteNo">
+                <option th:each="site : ${siteList}"
+                        th:value="${site.siteNo}"
+                        th:text="${site.siteName}"
+                        th:selected="${site.siteNo == targetContents.siteNo} ? 'selected'">
+                </option>
+            </select>
+        </div>
+
+        <h2>타겟 콘텐츠 정보</h2>
+        <div>
+            타겟콘텐츠명 : <input type="text" name="targetContentsName" th:value="${targetContents.targetContentsName}" />
+        </div>
+        <div>
+            타겟 콘텐츠 URL : <input type="text" name="targetContentsUrl" th:value="${targetContents.targetContentsUrl}" />
+        </div>
+        <div>
+            타겟 콘텐츠 셀렉터 : <input type="text" name="targetContentsCssSelector" th:value="${targetContents.targetContentsCssSelector}" />
+        </div>
+
+        <h2>메타태그</h2>
+        <div>
+            title 셀렉터 :
+            <input type="text" name="titleCssSelector" th:if="${targetContents.titleCssSelector != null && targetContents.titleCssSelector != ''}" th:value="${targetContents.titleCssSelector}" />
+            <input type="text" name="titleCssSelector" th:if="${targetContents.titleCssSelector == null || targetContents.titleCssSelector == ''}" value="meta[property=og:title]" />
+        </div>
+        <div>
+            title 태그 속성 :
+            <input type="text" name="titleAttr" th:if="${targetContents.titleAttr != null && targetContents.titleAttr != ''}" th:value="${targetContents.titleAttr}" />
+            <input type="text" name="titleAttr" th:if="${targetContents.titleAttr == null || targetContents.titleAttr == ''}" value="content" />
+        </div>
+        <div>
+            description 셀렉터 :
+            <input type="text" name="descriptionCssSelector" th:if="${targetContents.descriptionCssSelector != null && targetContents.descriptionCssSelector != ''}" th:value="${targetContents.descriptionCssSelector}" />
+            <input type="text" name="descriptionCssSelector" th:if="${targetContents.descriptionCssSelector == null || targetContents.descriptionCssSelector == ''}" value="meta[property=og:description]" />
+        </div>
+        <div>
+            description 태그 속성 :
+            <input type="text" name="descriptionAttr" th:if="${targetContents.descriptionAttr != null && targetContents.descriptionAttr != ''}" th:value="${targetContents.descriptionAttr}" />
+            <input type="text" name="descriptionAttr" th:if="${targetContents.descriptionAttr == null || targetContents.descriptionAttr == ''}" value="content" />
+        </div>
+        <div>
+            image 셀렉터 :
+            <input type="text" name="imageCssSelector" th:if="${targetContents.imageCssSelector != null && targetContents.imageCssSelector != ''}" th:value="${targetContents.imageCssSelector}" />
+            <input type="text" name="imageCssSelector" th:if="${targetContents.imageCssSelector == null || targetContents.imageCssSelector == ''}" value="meta[property=og:image]" />
+        </div>
+        <div>
+            image 태그 속성 :
+            <input type="text" name="imageAttr" th:if="${targetContents.imageAttr != null && targetContents.imageAttr != ''}" th:value="${targetContents.imageAttr}" />
+            <input type="text" name="imageAttr" th:if="${targetContents.imageAttr == null || targetContents.imageAttr == ''}" value="content" />
+        </div>
+        <div>
+            url 셀렉터 :
+            <input type="text" name="urlCssSelector" th:if="${targetContents.urlCssSelector != null && targetContents.urlCssSelector  != ''}" th:value="${targetContents.urlCssSelector}" />
+            <input type="text" name="urlCssSelector" th:if="${targetContents.urlCssSelector == null || targetContents.urlCssSelector == ''}" value="meta[property=og:url]" />
+        </div>
+        <div>
+            url 태그 속성 :
+            <input type="text" name="urlAttr" th:if="${targetContents.urlAttr != null && targetContents.urlAttr != ''}" th:value="${targetContents.urlAttr}" />
+            <input type="text" name="urlAttr" th:if="${targetContents.urlAttr == null || targetContents.urlAttr == ''}" value="content" />
+        </div>
+        <div>
+            <button>테스트</button>
+            <a th:href="@{~/target_contents/list}">취소</a>
+        </div>
+    </form>
+
+</body>
+</html>

@@ -7,6 +7,8 @@ moaview.db
 /src/main/resources-release/application.properties
 ''$'\302''t'$'\242''i'$'\262''2J'$'\264''!'$'\005''_'$'\215\177\371''~$'$'\020\004'
 "\302t\242i\2622J\264!\005_\215\177\371~$\020\004"
+*.p12
+
 
 ### STS ###
 .apt_generated

@@ -36,10 +36,10 @@ public class CrawlingTargetContentsScheduler {
     private final Logger logger = LoggerFactory.getLogger(CrawlingTargetContentsScheduler.class);
 
     /** 스케줄을 실행시키기 전까지의 대기시간 */
-    private final long FIXED_RATE = 1 * 60 * 1000;
+    private final long FIXED_RATE = 10 * 60 * 1000;
 
-    /** 스케줄 실행 후 대기 시간 */
-    private final long INITIAL_DELAY = 1 * 60 * 1000;
+    /** 애플리케이션 실행 후 대기 시간 */
+    private final long INITIAL_DELAY = 2 * 60 * 1000;
 
     @Autowired
     private SiteService siteService;

@@ -4,13 +4,34 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>타겟 콘텐츠 수정</title>
+    <script>
+        function ready(fn) {
+            if (document.readyState != 'loading'){
+                fn();
+            } else {
+                document.addEventListener('DOMContentLoaded', fn);
+            }
+        }
+
+        ready(function() {
+            var modifyForm = document.getElementById('modify-form');
+            var btnModify = document.querySelector('.btn-modify');
+
+            btnModify.addEventListener('click', function(e) {
+                modifyForm.setAttribute('action', '/target_contents/modify');
+                modifyForm.submit();
+            });
+        });
+    </script>
 </head>
 <body>
     <div th:insert="header :: header"></div>
 
     타겟 콘텐츠 수정
 
-    <form th:action="@{~/target_contents/modify}" method="post">
+    <div th:if="${contents != null}" th:text="${contents}"></div>
+
+    <form id="modify-form" th:action="@{~/target_contents/test}" method="post">
         <input type="hidden" name="targetContentsNo" th:value="${targetContents.targetContentsNo}" />
         <input type="hidden" name="responseCode" th:value="${targetContents.responseCode}" />
         <input type="hidden" name="responseMessage" th:value="${targetContents.responseMessage}" />
@@ -69,7 +90,8 @@
             url 태그 속성 : <input type="text" name="urlAttr" th:value="${targetContents.urlAttr}" />
         </div>
         <div>
-            <button>수정</button>
+            <button class="btn-modify">수정</button>
+            <button class="btn-test">테스트</button>
             <a th:href="@{~/target_contents/list}">취소</a>
         </div>
     </form>

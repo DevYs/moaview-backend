@@ -2,6 +2,8 @@ package devy.moaview.domain;
 
 import devy.moaview.service.mapper.Mapper;
 
+import javax.validation.constraints.NotEmpty;
+
 /**
  * 주기적으로 크롤링할 타겟 콘텐츠
  *
@@ -21,12 +23,15 @@ public class TargetContents extends Mapper {
 	private int siteNo;
 
 	/** 타겟 콘텐츠명 */
+	@NotEmpty
 	private String targetContentsName;
 
 	/** 타겟 콘텐츠 URL */
+	@NotEmpty
 	private String targetContentsUrl;
 
 	/** 타겟 콘텐츠 CSS 셀렉터 */
+	@NotEmpty
 	private String targetContentsCssSelector;
 
 	/** HTML 문서상에서 콘텐츠의 제목 태그 css 셀렉터 */

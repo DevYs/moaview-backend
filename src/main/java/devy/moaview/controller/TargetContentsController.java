@@ -13,8 +13,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 /**
  * 타겟 콘텐츠 정보의 요청 및 응답을 연결하는 컨트롤
@@ -49,6 +53,8 @@ public class TargetContentsController {
     public String registryTargetContentsGet(Model model) {
         model.addAttribute("contentsTypeList", Cache.CONTENTS_TYPE.list());
         model.addAttribute("siteList", Cache.SITE.list());
+        model.addAttribute("targetContents", new TargetContents());
+        model.addAttribute("contents", null);
         return "target_contents/registry";
     }
 
@@ -76,6 +82,7 @@ public class TargetContentsController {
         model.addAttribute("contentsTypeList", Cache.CONTENTS_TYPE.list());
         model.addAttribute("siteList", Cache.SITE.list());
         model.addAttribute("targetContents", targetContents);
+        model.addAttribute("contents", null);
         return "target_contents/modify";
     }
 
@@ -127,13 +134,25 @@ public class TargetContentsController {
      * @return 타겟 콘텐츠 테스트 화면 및 결과
      */
     @PostMapping("/target_contents/test")
-    public String testTargetContentsPost(TargetContents targetContents, Model model) {
+    public String testTargetContentsPost(@Valid TargetContents targetContents, Model model, BindingResult bindingResult) {
+
+        String view = "target_contents/registry";
+        if(targetContents.getTargetContentsNo() != 0) {
+            view = "target_contents/modify";
+        }
+        LoggerFactory.getLogger(TargetContentsController.class).info("view " + view);
+
+        if(bindingResult.hasErrors()) {
+            return view;
+        }
+
         Contents contents = targetContentsService.testTargetContents(targetContents);
         model.addAttribute("contentsTypeList", Cache.CONTENTS_TYPE.list());
         model.addAttribute("siteList", Cache.SITE.list());
         model.addAttribute("targetContents", targetContents);
         model.addAttribute("contents", contents);
-        return "target_contents/test";
+
+        return view;
     }
 
 }

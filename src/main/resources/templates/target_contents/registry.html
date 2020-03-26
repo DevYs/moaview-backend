@@ -4,13 +4,34 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>타겟 콘텐츠 등록</title>
+    <script>
+        function ready(fn) {
+            if (document.readyState != 'loading'){
+                fn();
+            } else {
+                document.addEventListener('DOMContentLoaded', fn);
+            }
+        }
+
+        ready(function() {
+            var registryForm = document.getElementById('registry-form');
+            var btnRegistry = document.querySelector('.btn-registry');
+
+            btnRegistry.addEventListener('click', function(e) {
+                registryForm.setAttribute('action', '/target_contents/registry');
+                registryForm.submit();
+            });
+        });
+    </script>
 </head>
 <body>
     <div th:insert="header :: header"></div>
 
     타겟 콘텐츠 등록
 
-    <form th:action="@{~/target_contents/registry}" method="post">
+    <div th:if="${contents != null}" th:text="${contents}"></div>
+
+    <form id="registry-form" th:action="@{~/target_contents/test}" method="post">
         <div>
             <select name="contentsTypeNo">
                 <option th:each="contentsType : ${contentsTypeList}" th:value="${contentsType.contentsTypeNo}" th:text="${contentsType.contentsTypeName}"></option>
@@ -24,13 +45,13 @@
 
         <h2>타겟 콘텐츠 정보</h2>
         <div>
-            타겟콘텐츠명 : <input type="text" name="targetContentsName" />
+            타겟콘텐츠명 : <input type="text" name="targetContentsName" th:value="${targetContents.targetContentsName}" />
         </div>
         <div>
-            타겟 콘텐츠 URL : <input type="text" name="targetContentsUrl" />
+            타겟 콘텐츠 URL : <input type="text" name="targetContentsUrl" th:value="${targetContents.targetContentsUrl}" />
         </div>
         <div>
-            타겟 콘텐츠 셀렉터 : <input type="text" name="targetContentsCssSelector" />
+            타겟 콘텐츠 셀렉터 : <input type="text" name="targetContentsCssSelector" th:value="${targetContentsCssSelector}" />
         </div>
 
         <h2>메타태그</h2>
@@ -59,7 +80,8 @@
             url 태그 속성 : <input type="text" name="urlAttr" value="content" />
         </div>
         <div>
-            <button>등록</button>
+            <button class="btn-registry">등록</button>
+            <button class="btn-test">테스트</button>
             <a th:href="@{~/target_contents/list}">취소</a>
         </div>
     </form>

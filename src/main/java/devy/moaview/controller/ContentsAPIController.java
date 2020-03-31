@@ -6,6 +6,7 @@ import devy.moaview.service.ContentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -24,7 +25,7 @@ public class ContentsAPIController {
      *        검색 및 페이징 정보와 콘텐츠 목록을 위한 정보를 담을 객체
      * @return ResponseContents 객체에 결과를 담아 반환한다.
      */
-    @GetMapping("/contents/list")
+    @PostMapping("/contents/list")
     @ResponseBody
     public ResponseContents listContentsGet(@RequestBody RequestContents requestContents) {
         return contentsService.listContents(requestContents);

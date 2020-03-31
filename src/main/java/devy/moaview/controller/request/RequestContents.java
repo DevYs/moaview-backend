@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class RequestContents {
 
-	/** 조회할 페이지 번호 */
+	/** 조회할 페이지 번호. 입력값 */
 	private int pageNo = 1;
 
 	/** 페이지당 컬럼 수 */
@@ -16,10 +16,10 @@ public class RequestContents {
 	/** 검색 위치 */
 	private int offset = 0;
 
-	/** 콘텐트 타입 번호 목록 */
+	/** 콘텐트 타입 번호 목록. 입력값 */
 	private List<Integer> contentsTypeNoList;
 
-	/** 콘텐츠 제목 */
+	/** 콘텐츠 제목. 입력값 */
 	private String title;
 
 	public int getPageNo() {

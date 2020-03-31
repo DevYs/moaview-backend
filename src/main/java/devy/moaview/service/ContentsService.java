@@ -11,6 +11,7 @@ import devy.moaview.service.mapper.ContentsMapper;
 import devy.moaview.service.mapper.ContentsTypeMapper;
 import devy.moaview.service.mapper.SiteMapper;
 import devy.moaview.service.mapper.TargetContentsMapper;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +45,7 @@ public class ContentsService {
      * @return 콘텐츠 타입 목록, 사이트 정보, 조회된 콘텐츠 목록 등을 반환한다.
      */
     public ResponseContents listContents(RequestContents requestContents) {
+        LoggerFactory.getLogger(ContentsService.class).info(requestContents.toString());
         List<Contents> contentsList = Contents.list(requestContents, contentsMapper);
 
         ResponseContents responseContents = new ResponseContents(contentsTypeMapper, siteMapper);

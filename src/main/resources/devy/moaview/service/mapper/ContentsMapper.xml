@@ -58,7 +58,7 @@
             <if test="title != null">
                 AND title LIKE '%' || #{title} || '%'
             </if>
-            <if test="contentsTypeNoList != null">
+            <if test="contentsTypeNoList.size != 0">
                 AND tc.contents_type_no IN
                 <foreach collection="contentsTypeNoList" index="index" item="contentsTypeNo"  open="(" close=")" separator=",">
                     #{contentsTypeNo}

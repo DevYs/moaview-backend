@@ -64,6 +64,8 @@ public class RequestContents {
 	public String toString() {
 		return "RequestContents{" +
 				"pageNo=" + pageNo +
+				", limit=" + limit +
+				", offset=" + offset +
 				", contentsTypeNoList=" + contentsTypeNoList +
 				", title='" + title + '\'' +
 				'}';

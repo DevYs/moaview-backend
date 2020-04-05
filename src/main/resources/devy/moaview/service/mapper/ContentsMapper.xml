@@ -65,7 +65,7 @@
                 </foreach>
             </if>
         ORDER BY c.reg_date desc
-            <if test="0 &lt; pageNo">
+            <if test="-1 &lt; pageNo">
                 limit #{limit}
                 offset #{offset}
             </if>

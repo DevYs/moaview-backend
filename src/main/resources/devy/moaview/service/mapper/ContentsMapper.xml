@@ -65,10 +65,8 @@
                 </foreach>
             </if>
         ORDER BY c.reg_date desc
-            <if test="-1 &lt; pageNo">
-                limit #{limit}
-                offset #{offset}
-            </if>
+        limit #{limit}
+        offset #{offset}
     </select>
 
     <select id="selectOne" resultType="devy.moaview.domain.Contents">
